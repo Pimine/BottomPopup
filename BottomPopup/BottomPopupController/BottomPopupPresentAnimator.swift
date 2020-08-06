@@ -25,7 +25,12 @@ final class BottomPopupPresentAnimator: NSObject, UIViewControllerAnimatedTransi
         let presentFrame = transitionContext.finalFrame(for: toVC)
         let initialFrame = CGRect(origin: CGPoint(x: 0, y: UIScreen.main.bounds.size.height), size: presentFrame.size)
         toVC.view.frame = initialFrame
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+        
+        UIView.animate(
+            withDuration: transitionDuration(using: transitionContext),
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 0.3, options: [.curveEaseIn], animations: {
             toVC.view.frame = presentFrame
         }) { (_) in
             transitionContext.completeTransition(true)

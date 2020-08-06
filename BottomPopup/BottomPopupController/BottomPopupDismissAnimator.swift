@@ -23,10 +23,16 @@ final class BottomPopupDismissAnimator: NSObject, UIViewControllerAnimatedTransi
         let fromVC = transitionContext.viewController(forKey: .from)!
         let dismissFrame = CGRect(origin: CGPoint(x: 0, y: UIScreen.main.bounds.size.height), size: fromVC.view.frame.size)
         
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+        UIView.animate(
+            withDuration: transitionDuration(using: transitionContext),
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 0.3,
+            options: [.curveEaseOut],
+            animations: {
             fromVC.view.frame = dismissFrame
         }) { (_) in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            transitionContext.completeTransition(true)
         }
     }
 }
